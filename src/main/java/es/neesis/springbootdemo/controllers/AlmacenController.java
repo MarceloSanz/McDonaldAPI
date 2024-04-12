@@ -1,9 +1,6 @@
 package es.neesis.springbootdemo.controllers;
 
 import es.neesis.springbootdemo.model.Producto;
-import es.neesis.springbootdemo.model.Trabajador;
-import es.neesis.springbootdemo.services.IAlmacenService;
-import es.neesis.springbootdemo.services.IPedidosService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController(value = "/almacen")
