@@ -41,14 +41,28 @@ public class AlmacenDB implements IAlmacenDB{
     }
 
     public boolean pushProducto(int id, int cantidad){
-        Producto producto = productoPorId(id);
-        producto.setCantidad(producto.getCantidad() + cantidad);
-        return true;
+
+        boolean productoAumentado = false;
+        try{
+            Producto producto = productoPorId(id);
+            producto.setCantidad(producto.getCantidad() + cantidad);
+            productoAumentado = true;
+        } catch (Exception e){
+            System.out.println("El producto no existe");
+        }
+        return productoAumentado;
     }
 
-    public boolean popProducto(int id, int cantidad){
-        Producto producto = productoPorId(id);
-        producto.setCantidad(producto.getCantidad() - cantidad);
+    public boolean popProducto(int id, int cantidad) {
+        boolean hayProducto = false;
+        try {
+            Producto producto = productoPorId(id);
+            producto.setCantidad(producto.getCantidad() - cantidad);
+            hayProducto = true;
+        } catch (Exception e) {
+            System.out.println("El producto no existe");
+        }
+        return hayProducto;
     }
 
 }
