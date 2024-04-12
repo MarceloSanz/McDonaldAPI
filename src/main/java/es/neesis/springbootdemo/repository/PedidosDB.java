@@ -1,13 +1,27 @@
 package es.neesis.springbootdemo.repository;
 
 import es.neesis.springbootdemo.model.Pedido;
+import es.neesis.springbootdemo.model.Producto;
+import es.neesis.springbootdemo.model.Trabajador;
+import es.neesis.springbootdemo.services.ITrabajadorService;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+@Repository
 public class PedidosDB implements IPedidosDB{
+    private final ITrabajadorService trabajadorService;
+    private final IAlmacenDB almacenDB;
 
     private HashMap<Integer,Pedido> pedidos = new HashMap<>();
+
+    public PedidosDB(ITrabajadorService iTrabajadorService, IAlmacenDB iAlmacenDB) {
+        this.trabajadorService = iTrabajadorService;
+        this.almacenDB = iAlmacenDB;
+    }
+
     @Override
     public ArrayList<Pedido> listarPedidos() {
         return new ArrayList<Pedido>(pedidos.values());
@@ -24,11 +38,11 @@ public class PedidosDB implements IPedidosDB{
     @Override
     public boolean addComida(int idPedido, int idProducto) {
         boolean productoEncontrado = false;
-        ArrayList<Producto> listaProductos = listarTodosLosProductos;
-        Producto producto;
+        List<Producto> listaProductos = almacenDB.listarProductosAlmacen();
+        Producto producto = null;
         for (int i = 0;!productoEncontrado && i < listaProductos.size() ; i++) {
             Producto producto1 = listaProductos.get(i);
-            if (producto1.id == idProducto){
+            if (producto1.getId() == idProducto){
                 producto = producto1;
                 productoEncontrado = true;
             }
@@ -45,7 +59,8 @@ public class PedidosDB implements IPedidosDB{
 
     @Override
     public boolean addPeronal(int idPedido) {
-        ArrayList<Trabajadores> litaTrabajadores = listarTodosLosTrabajadores;
+        HashMap<Integer,Trabajador> lista = trabajadorService.listarTodosLosTrabajadores();
+        ArrayList<Trabajador> litaTrabajadores = new ArrayList<>(lista.values());
         int numPersonal = (int) (Math.random()*litaTrabajadores.size()-1);
         Trabajador trabajador = litaTrabajadores.get(numPersonal);
         Pedido pedido = pedidos.get(idPedido);
@@ -57,16 +72,9 @@ public class PedidosDB implements IPedidosDB{
 
     @Override
     public boolean addPeronal(int idPedido, int idTrabajador) {
-        boolean trabajadorEncontrado = false;
-        ArrayList<Trabajadores> litaTrabajadores = listarTodosLosTrabajadores;
-        Trabajador trabajador;
-        for (Trabajador trabajador1 : litaTrabajadores){
-            if (trabajador1.id == idTrabajador){
-                trabajador = trabajador1;
-                trabajadorEncontrado = true;
-            }
-        }
-        if (trabajadorEncontrado){
+        HashMap<Integer,Trabajador> listaTrabajadores = trabajadorService.listarTodosLosTrabajadores();
+        Trabajador trabajador = listaTrabajadores.get(idTrabajador);
+        if (trabajador != null){
             Pedido pedido = pedidos.get(idPedido);
             if (pedido != null){
                 pedido.setTrabajador(trabajador);

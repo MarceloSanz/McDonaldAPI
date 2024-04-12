@@ -1,9 +1,11 @@
 package es.neesis.springbootdemo.services;
 
 import es.neesis.springbootdemo.model.Pedido;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
+@Service
 public interface IPedidosService {
 
     public ArrayList<Pedido> listarPedidos();

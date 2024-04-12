@@ -2,6 +2,7 @@ package es.neesis.springbootdemo.services;
 
 import es.neesis.springbootdemo.model.Pedido;
 import es.neesis.springbootdemo.repository.IPedidosDB;
+import es.neesis.springbootdemo.repository.PedidosDB;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,10 +11,10 @@ import java.util.ArrayList;
 public class PedidosService implements IPedidosService {
 
 
-    private final IPedidosDB pedidosDB;
+    private final PedidosDB pedidosDB;
 
 
-    public PedidosService(IPedidosDB pedidosDB) {
+    public PedidosService(PedidosDB pedidosDB) {
         this.pedidosDB = pedidosDB;
     }
 

@@ -44,7 +44,7 @@ public class Pedido {
         return productos;
     }
 
-    public void setProductos(Producto producto) {
+    public void setProducto(Producto producto) {
         this.productos.add(producto);
     }
 

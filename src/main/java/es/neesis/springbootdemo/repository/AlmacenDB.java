@@ -2,11 +2,13 @@ package es.neesis.springbootdemo.repository;
 
 import java.util.ArrayList;
 import es.neesis.springbootdemo.model.Producto;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public class AlmacenDB implements IAlmacenDB{
     private Map<Integer, Producto> productosAlmacenados;
 
@@ -41,14 +43,28 @@ public class AlmacenDB implements IAlmacenDB{
     }
 
     public boolean pushProducto(int id, int cantidad){
-        Producto producto = productoPorId(id);
-        producto.setCantidad(producto.getCantidad() + cantidad);
-        return true;
+
+        boolean productoAumentado = false;
+        try{
+            Producto producto = productoPorId(id);
+            producto.setCantidad(producto.getCantidad() + cantidad);
+            productoAumentado = true;
+        } catch (Exception e){
+            System.out.println("El producto no existe");
+        }
+        return productoAumentado;
     }
 
-    public boolean popProducto(int id, int cantidad){
-        Producto producto = productoPorId(id);
-        producto.setCantidad(producto.getCantidad() - cantidad);
+    public boolean popProducto(int id, int cantidad) {
+        boolean hayProducto = false;
+        try {
+            Producto producto = productoPorId(id);
+            producto.setCantidad(producto.getCantidad() - cantidad);
+            hayProducto = true;
+        } catch (Exception e) {
+            System.out.println("El producto no existe");
+        }
+        return hayProducto;
     }
 
 }

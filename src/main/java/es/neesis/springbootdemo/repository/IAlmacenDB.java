@@ -13,4 +13,8 @@ public interface IAlmacenDB {
     int cantidadProductoAlmacenado(int id);
 
     Producto productoPorId(int id);
+
+    boolean pushProducto(int id, int cantidad);
+
+    boolean popProducto(int id, int cantidad);
 }
