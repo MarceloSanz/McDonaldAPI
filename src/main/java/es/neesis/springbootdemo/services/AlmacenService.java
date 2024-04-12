@@ -1,7 +1,5 @@
 package es.neesis.springbootdemo.services;
 
-import es.neesis.springbootdemo.model.Producto;
-import es.neesis.springbootdemo.model.Usuario;
 import es.neesis.springbootdemo.repository.IAlmacenDB;
 import org.springframework.stereotype.Service;
 
