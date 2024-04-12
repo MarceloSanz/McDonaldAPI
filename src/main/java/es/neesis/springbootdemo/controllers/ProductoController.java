@@ -1,35 +1,37 @@
 package es.neesis.springbootdemo.controllers;
 
 
-import es.neesis.springbootdemo.model.Usuario;
+import es.neesis.springbootdemo.model.Producto;
 import es.neesis.springbootdemo.repository.IAlmacenDB;
-import es.neesis.springbootdemo.services.IUsuarioService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import es.neesis.springbootdemo.services.IAlmacenService;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/producto")
 public class ProductoController {
+    private final IAlmacenService almacenService;
 
-    private final  IAlmacenDB almacenDB;
-
-    private final IUsuarioService usuarioService;
-
-    public UsuarioController(IUsuarioService usuarioService) {
-        this.usuarioService = usuarioService;
+    public ProductoController(IAlmacenService almacenService) {
+        this.almacenService = almacenService;
     }
-
-    @GetMapping(value = "/init")
-    public void inicializarUsuarios() {
-        usuarioService.inicializarUsuarios();
+    @PostMapping(value = "/list")
+    public List<Producto> listarTodosLosProductos(){
+        return almacenService.listarProductosAlmacen();
     }
-
-    @GetMapping(value = "/list")
-    public List<Usuario> listarUsuarios() {
-        return usuarioService.listarUsuarios();
+    @PostMapping(value = "/cantidad/{id}")
+    public Producto obtenerCantidadPorID(@PathVariable int id){
+        return almacenService.productoPorId(id);
     }
-
+    @GetMapping(value = "/add/{id}/{cantidad}")
+    public boolean push(@PathVariable  int id,@PathVariable int cantidad){
+        return almacenService.pushProducto(id,cantidad);
+    }
+    @GetMapping(value = "/delete/{id}/{cantidad}")
+    public boolean pop(@PathVariable int id, @PathVariable int cantidad){
+        return almacenService.popProducto(id, cantidad);
+    }
 }
+
+
