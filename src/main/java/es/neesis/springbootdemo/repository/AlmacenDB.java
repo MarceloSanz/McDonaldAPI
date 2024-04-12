@@ -2,11 +2,13 @@ package es.neesis.springbootdemo.repository;
 
 import java.util.ArrayList;
 import es.neesis.springbootdemo.model.Producto;
+import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public class AlmacenDB implements IAlmacenDB{
     private Map<Integer, Producto> productosAlmacenados;
 
