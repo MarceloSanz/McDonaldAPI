@@ -1,5 +1,6 @@
 package es.neesis.springbootdemo.repository;
 
+import es.neesis.springbootdemo.model.Producto;
 import es.neesis.springbootdemo.model.Trabajador;
 import org.springframework.stereotype.Repository;
 
@@ -25,7 +26,7 @@ public class TrabajadorDB implements ITrabajadorDB{
     @Override
     public Trabajador buscarTrabajadorPorId(int idTrabajador) {
         Trabajador response = trabajadorRepo.get(idTrabajador);
-        if (response!=null){
+        if(response!=null){
             return response;
         }
         return null;
@@ -38,13 +39,25 @@ public class TrabajadorDB implements ITrabajadorDB{
 
     @Override
     public boolean añadirTrabajador(Trabajador trabajador) {
-        trabajadorRepo.put(trabajadorRepo.size()+1,trabajador);
-        return false;
+        boolean trabajadorAñadido = false;
+        try {
+            trabajadorRepo.put(trabajadorRepo.size()+1,trabajador);
+            trabajadorAñadido = true;
+        } catch (Exception e) {
+            System.out.println("El trabajador no se pudo añadir");
+        }
+        return trabajadorAñadido;
     }
 
     @Override
     public boolean borrarTrabajador(int idTrabajador) {
-        trabajadorRepo.remove(idTrabajador);
-        return false;
+        boolean trabajdorBorrado = false;
+        try {
+            trabajadorRepo.remove(idTrabajador);
+            trabajdorBorrado = true;
+        } catch (Exception e) {
+            System.out.println("El trabajador no se pudo añadir");
+        }
+        return trabajdorBorrado;
     }
 }

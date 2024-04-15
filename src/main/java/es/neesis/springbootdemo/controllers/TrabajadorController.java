@@ -14,23 +14,23 @@ public class TrabajadorController {
     public TrabajadorController(TrabajadorService trabajadorService){
         this.trabajadorService = trabajadorService;
     }
-    @GetMapping(value = "/init")
+    @PostMapping(value = "/init")
     public void inicializarTrabajadores() {
         trabajadorService.inicializarTrabajadores();
     }
-    @GetMapping(value = "/getById/{id}")
+    @GetMapping(value = "/{id}")
     public Trabajador mostrarTrabajador(@PathVariable int id) {
         return trabajadorService.buscarTrabajadorPorId(id);
     }
-    @GetMapping(value = "/list")
+    @GetMapping(value = "")
     public List<Trabajador> listarTrabajadores() {
         return new ArrayList<>(trabajadorService.listarTodosLosTrabajadores().values());
     }
-    @PostMapping(value = "/add")
+    @PostMapping(value = "")
     public boolean añadirTrabajador(@RequestBody Trabajador trabajador){
         return trabajadorService.añadirTrabajador(trabajador);
     }
-    @GetMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/{id}")
     public boolean borrarTrabajador(@PathVariable int id){
         return trabajadorService.borrarTrabajador(id);
     }
