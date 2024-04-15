@@ -15,34 +15,34 @@ public class PedidosController {
         this.pedidosService = pedidosService;
     }
 
-    @GetMapping(value = "/list")
+    @GetMapping()
     public ArrayList<Pedido> listarPedidos() {
         return pedidosService.listarPedidos();
     }
 
-    @PostMapping(value = "/altaPedido")
+    @PostMapping()
     public int altaPedido(){
         return pedidosService.altaPedido();
     }
 
-    @PutMapping(value = "/addComida/{idPedido}/{idProducto}")
+    @PostMapping(value = "/{idPedido}/producto/{idProducto}")
     public boolean addComida(@PathVariable int idPedido, @PathVariable int idProducto){
         return pedidosService.addComida(idPedido,idProducto);
     }
 
-    @PutMapping(value = "/addPersonal/{idPedido}")
+    @PostMapping(value = "/{idPedido}/personal/")
     public boolean addPeronal(@PathVariable int idPedido){
         return pedidosService.addPeronal(idPedido);
     }
 
-    @PutMapping(value = "/addPersonal/{idPedido}/{idTrabajador}")
+    @PostMapping(value = "/{idPedido}/personal/{idTrabajador}")
     public boolean addPeronal(@PathVariable int idPedido, @PathVariable int idTrabajador){
         return pedidosService.addPeronal(idPedido,idTrabajador);
     }
 
-    @PutMapping(value = "/finalizar/{id}")
-    public Pedido finalizar(@PathVariable int id){
-        return pedidosService.finalizar(id);
+    @PostMapping(value = "/{idPedido}/finalizar")
+    public Pedido finalizar(@PathVariable int idPedido){
+        return pedidosService.finalizar(idPedido);
     }
 
 
