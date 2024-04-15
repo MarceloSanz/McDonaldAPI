@@ -16,15 +16,15 @@ public class ProductoController {
     public ProductoController(IAlmacenService almacenService) {
         this.almacenService = almacenService;
     }
-    @PostMapping(value = "/list")
+    @GetMapping(value = "/list")
     public List<Producto> listarTodosLosProductos(){
         return almacenService.listarProductosAlmacen();
     }
-    @PostMapping(value = "/cantidad/{id}")
+    @GetMapping(value = "/cantidad/{id}")
     public Producto obtenerCantidadPorID(@PathVariable int id){
         return almacenService.productoPorId(id);
     }
-    @GetMapping(value = "/add/{id}/{cantidad}")
+    @PostMapping(value = "/add/{id}/{cantidad}")
     public boolean push(@PathVariable  int id,@PathVariable int cantidad){
         return almacenService.pushProducto(id,cantidad);
     }
