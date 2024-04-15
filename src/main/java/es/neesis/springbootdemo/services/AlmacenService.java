@@ -6,6 +6,7 @@ import es.neesis.springbootdemo.repository.IAlmacenDB;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AlmacenService implements IAlmacenService{
@@ -17,7 +18,6 @@ public class AlmacenService implements IAlmacenService{
     }
 
     public void inicializarAlmacen() {
-        //mostrarCosasPorConsola();
         almacenDB.inicializarAlmacen();
     }
 
@@ -27,7 +27,7 @@ public class AlmacenService implements IAlmacenService{
     }
 
     @Override
-    public List<Producto> listarProductosAlmacen() {
+    public Map<Integer,Producto> listarProductosAlmacen() {
         return almacenDB.listarProductosAlmacen();
     }
 
@@ -41,8 +41,4 @@ public class AlmacenService implements IAlmacenService{
         return almacenDB.popProducto(id, cantidad);
     }
 
-    private void mostrarCosasPorConsola() {
-        System.out.println("Hola, soy el servicio de almacen");
-        System.out.println("Los productos almacenados en el almacen son los siguientes: ");
-    }
 }

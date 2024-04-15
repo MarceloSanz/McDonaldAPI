@@ -3,6 +3,7 @@ package es.neesis.springbootdemo.repository;
 import es.neesis.springbootdemo.model.Pedido;
 import es.neesis.springbootdemo.model.Producto;
 import es.neesis.springbootdemo.model.Trabajador;
+import es.neesis.springbootdemo.services.IAlmacenService;
 import es.neesis.springbootdemo.services.ITrabajadorService;
 import org.springframework.stereotype.Repository;
 
@@ -13,13 +14,13 @@ import java.util.List;
 @Repository
 public class PedidosDB implements IPedidosDB{
     private final ITrabajadorService trabajadorService;
-    private final IAlmacenDB almacenDB;
+    private final IAlmacenService almacenService;
 
     private HashMap<Integer,Pedido> pedidos = new HashMap<>();
 
-    public PedidosDB(ITrabajadorService iTrabajadorService, IAlmacenDB iAlmacenDB) {
+    public PedidosDB(ITrabajadorService iTrabajadorService, IAlmacenService iAlmacenService) {
         this.trabajadorService = iTrabajadorService;
-        this.almacenDB = iAlmacenDB;
+        this.almacenService = iAlmacenService;
     }
 
     @Override
@@ -37,17 +38,8 @@ public class PedidosDB implements IPedidosDB{
 
     @Override
     public boolean addComida(int idPedido, int idProducto) {
-        boolean productoEncontrado = false;
-        List<Producto> listaProductos = almacenDB.listarProductosAlmacen();
-        Producto producto = null;
-        for (int i = 0;!productoEncontrado && i < listaProductos.size() ; i++) {
-            Producto producto1 = listaProductos.get(i);
-            if (producto1.getId() == idProducto){
-                producto = producto1;
-                productoEncontrado = true;
-            }
-        }
-        if (productoEncontrado){
+        Producto producto = almacenService.productoPorId(idProducto);
+        if (producto != null){
             Pedido pedido = pedidos.get(idPedido);
             if (pedido != null && pedido.isEstado()){
                 pedido.setProducto(producto);
@@ -60,9 +52,8 @@ public class PedidosDB implements IPedidosDB{
     @Override
     public boolean addPeronal(int idPedido) {
         HashMap<Integer,Trabajador> lista = trabajadorService.listarTodosLosTrabajadores();
-        ArrayList<Trabajador> litaTrabajadores = new ArrayList<>(lista.values());
-        int numPersonal = (int) (Math.random()*litaTrabajadores.size()-1);
-        Trabajador trabajador = litaTrabajadores.get(numPersonal);
+        int numPersonal = (int) (Math.random()*lista.size()-1);
+        Trabajador trabajador = lista.get(numPersonal);
         Pedido pedido = pedidos.get(idPedido);
         if (pedido != null && pedido.isEstado()){
             pedido.setTrabajador(trabajador);

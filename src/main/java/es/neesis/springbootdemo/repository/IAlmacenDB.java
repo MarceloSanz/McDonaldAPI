@@ -2,13 +2,15 @@ package es.neesis.springbootdemo.repository;
 import es.neesis.springbootdemo.model.Producto;
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public interface IAlmacenDB {
 
     void inicializarAlmacen();
 
-    List<Producto> listarProductosAlmacen();
+    Map<Integer,Producto> listarProductosAlmacen();
 
     int cantidadProductoAlmacenado(int id);
 

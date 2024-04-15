@@ -5,6 +5,7 @@ import es.neesis.springbootdemo.model.Producto;
 import es.neesis.springbootdemo.services.IAlmacenService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,7 +24,7 @@ public class AlmacenController {
 
     @GetMapping()
     public List<Producto> listarTodosLosProductos(){
-        return almacenService.listarProductosAlmacen();
+        return new ArrayList<>(almacenService.listarProductosAlmacen().values());
     }
     @GetMapping(value = "/{id}")
     public Producto obtenerProductoPorID(@PathVariable int id){

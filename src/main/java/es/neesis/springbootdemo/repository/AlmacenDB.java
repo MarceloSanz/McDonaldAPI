@@ -28,8 +28,8 @@ public class AlmacenDB implements IAlmacenDB{
 
 
     @Override
-    public List<Producto> listarProductosAlmacen() {
-        return new ArrayList<Producto>(productosAlmacenados.values());
+    public Map<Integer,Producto> listarProductosAlmacen() {
+        return productosAlmacenados;
     }
 
     @Override
