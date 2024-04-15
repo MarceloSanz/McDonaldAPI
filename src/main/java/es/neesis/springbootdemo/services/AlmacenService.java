@@ -17,9 +17,8 @@ public class AlmacenService implements IAlmacenService{
     }
 
     public void inicializarAlmacen() {
-        mostrarCosasPorConsola();
+        //mostrarCosasPorConsola();
         almacenDB.inicializarAlmacen();
-        almacenDB.listarProductosAlmacen();
     }
 
     @Override
