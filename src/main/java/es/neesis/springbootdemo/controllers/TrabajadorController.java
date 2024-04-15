@@ -14,7 +14,7 @@ public class TrabajadorController {
     public TrabajadorController(TrabajadorService trabajadorService){
         this.trabajadorService = trabajadorService;
     }
-    @GetMapping(value = "/init")
+    @PostMapping(value = "/init")
     public void inicializarTrabajadores() {
         trabajadorService.inicializarTrabajadores();
     }
@@ -30,7 +30,7 @@ public class TrabajadorController {
     public boolean añadirTrabajador(@RequestBody Trabajador trabajador){
         return trabajadorService.añadirTrabajador(trabajador);
     }
-    @GetMapping(value = "/delete/{id}")
+    @DeleteMapping(value = "/delete/{id}")
     public boolean borrarTrabajador(@PathVariable int id){
         return trabajadorService.borrarTrabajador(id);
     }
