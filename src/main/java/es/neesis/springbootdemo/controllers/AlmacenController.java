@@ -21,7 +21,7 @@ public class AlmacenController {
         this.almacenService.inicializarAlmacen();
     }
 
-    @GetMapping(value = "/list")
+    @GetMapping()
     public List<Producto> listarTodosLosProductos(){
         return almacenService.listarProductosAlmacen();
     }
@@ -29,11 +29,11 @@ public class AlmacenController {
     public Producto obtenerProductoPorID(@PathVariable int id){
         return almacenService.productoPorId(id);
     }
-    @PutMapping(value = "/add/{id}/{cantidad}")
+    @PutMapping(value = "/{id}/add/{cantidad}")
     public boolean push(@PathVariable  int id,@PathVariable int cantidad){
         return almacenService.pushProducto(id,cantidad);
     }
-    @PostMapping(value = "/delete/{id}/{cantidad}")
+    @PostMapping(value = "/{id}/disminuir/{cantidad}")
     public boolean pop(@PathVariable int id, @PathVariable int cantidad){
         return almacenService.popProducto(id, cantidad);
     }
