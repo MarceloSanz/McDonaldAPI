@@ -49,7 +49,7 @@ public class PedidosDB implements IPedidosDB{
         }
         if (productoEncontrado){
             Pedido pedido = pedidos.get(idPedido);
-            if (pedido != null){
+            if (pedido != null && pedido.isEstado()){
                 pedido.setProducto(producto);
                 return true;
             }
@@ -64,8 +64,9 @@ public class PedidosDB implements IPedidosDB{
         int numPersonal = (int) (Math.random()*litaTrabajadores.size()-1);
         Trabajador trabajador = litaTrabajadores.get(numPersonal);
         Pedido pedido = pedidos.get(idPedido);
-        if (pedido != null){
+        if (pedido != null && pedido.isEstado()){
             pedido.setTrabajador(trabajador);
+            return true;
         }
         return false;
     }
@@ -74,9 +75,9 @@ public class PedidosDB implements IPedidosDB{
     public boolean addPeronal(int idPedido, int idTrabajador) {
         HashMap<Integer,Trabajador> listaTrabajadores = trabajadorService.listarTodosLosTrabajadores();
         Trabajador trabajador = listaTrabajadores.get(idTrabajador);
-        if (trabajador != null){
+        if (trabajador != null ){
             Pedido pedido = pedidos.get(idPedido);
-            if (pedido != null){
+            if (pedido != null  && pedido.isEstado()){
                 pedido.setTrabajador(trabajador);
                 return true;
             }
