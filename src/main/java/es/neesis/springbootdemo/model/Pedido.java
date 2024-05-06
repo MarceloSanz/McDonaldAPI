@@ -1,14 +1,21 @@
 package es.neesis.springbootdemo.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.util.ArrayList;
 
 public class Pedido {
+    @Schema(description = "Identificador del Pedido")
     private int idPedido;
 
+    @Schema(description = "Trabajador a Cargo del Pedido")
     private Trabajador trabajador;
 
+
+    @Schema(description = "Lista de productos del Pedido")
     private ArrayList<Producto> productos;
 
+    @Schema(description = "Estado del Pedido")
     private boolean estado;
 
 
