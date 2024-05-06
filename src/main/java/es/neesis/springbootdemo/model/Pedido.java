@@ -1,11 +1,16 @@
 package es.neesis.springbootdemo.model;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 
 import java.util.ArrayList;
 
 public class Pedido {
     @Schema(description = "Identificador del Pedido")
+    @NotNull(message = "El ID no puede ser null")
+    @PositiveOrZero(message = "El ID minimo es 0")
     private int idPedido;
 
     @Schema(description = "Trabajador a Cargo del Pedido")
@@ -16,6 +21,7 @@ public class Pedido {
     private ArrayList<Producto> productos;
 
     @Schema(description = "Estado del Pedido")
+    @NotNull(message = "El estado no puede ser null")
     private boolean estado;
 
 
