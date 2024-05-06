@@ -29,7 +29,7 @@ public class TrabajadorService implements ITrabajadorService {
     }
 
     @Override
-    public boolean añadirTrabajador(Trabajador trabajador) {
+    public boolean agregarTrabajador(Trabajador trabajador) {
         return trabajadorDB.añadirTrabajador(trabajador);
     }
 

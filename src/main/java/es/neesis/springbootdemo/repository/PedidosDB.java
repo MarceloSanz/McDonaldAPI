@@ -43,6 +43,7 @@ public class PedidosDB implements IPedidosDB{
             Pedido pedido = pedidos.get(idPedido);
             if (pedido != null && pedido.isEstado()){
                 pedido.setProducto(producto);
+                almacenService.popProducto(idProducto,producto.getCantidad()-1);
                 return true;
             }
         }

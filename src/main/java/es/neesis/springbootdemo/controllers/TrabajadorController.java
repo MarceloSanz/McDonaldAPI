@@ -28,7 +28,7 @@ public class TrabajadorController {
     }
     @PostMapping(value = "")
     public boolean añadirTrabajador(@RequestBody Trabajador trabajador){
-        return trabajadorService.añadirTrabajador(trabajador);
+        return trabajadorService.agregarTrabajador(trabajador);
     }
     @DeleteMapping(value = "/{id}")
     public boolean borrarTrabajador(@PathVariable int id){
